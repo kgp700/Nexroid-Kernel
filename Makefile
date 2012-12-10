@@ -340,8 +340,8 @@ OPTIMIZATIONS	=
 CFLAGS_MODULE   = $(MODFLAGS) 
 AFLAGS_MODULE   = $(MODFLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
-CFLAGS_KERNEL	= -fgcse -fsched-spec-load-dangerous -fforce-addr -funsafe-loop-optimizations -fsingle-precision-constant -mtune=cortex-a8 -march=armv7-a -mfpu=neon -ftree-vectorize -pipe -fprofile-correction -falign-loops -funswitch-loops -fpredictive-commoning -fgcse-after-reload -ftree-loop-distribution
-AFLAGS_KERNEL	= -fgcse -fsched-spec-load-dangerous -fforce-addr -funsafe-loop-optimizations -fsingle-precision-constant -mtune=cortex-a8 -march=armv7-a -mfpu=neon -ftree-vectorize -pipe -fprofile-correction -falign-loops -funswitch-loops -fpredictive-commoning -fgcse-after-reload -ftree-loop-distribution
+CFLAGS_KERNEL	= -mtune=cortex-a8 -march=armv7-a -mfpu=neon -ftree-vectorize -fno-gcse -fsingle-precision-constant -funswitch-loops -fprofile-correction -funsafe-math-optimizations -fipa-cp-clone -fgraphite-identity -floop-interchange -floop-strip-mine -floop-block -pipe
+AFLAGS_KERNEL	= -mtune=cortex-a8 -march=armv7-a -mfpu=neon -ftree-vectorize -fno-gcse -fsingle-precision-constant -funswitch-loops -fprofile-correction -funsafe-math-optimizations -fipa-cp-clone -fgraphite-identity -floop-interchange -floop-strip-mine -floop-block -pipe
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
@@ -358,11 +358,11 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -fgcse -fsched-spec-load-dangerous -fforce-addr \
-		   -funsafe-loop-optimizations -fsingle-precision-constant \
-		   -mtune=cortex-a8 -march=armv7-a -mfpu=neon \
-		   -ftree-vectorize -pipe -fprofile-correction -falign-loops \
-		   -funswitch-loops -fpredictive-commoning -fgcse-after-reload -ftree-loop-distribution   
+		   -mtune=cortex-a8 -march=armv7-a -mfpu=neon -mfloat-abi=hard \
+		   -fno-gcse -ftree-vectorize -fsingle-precision-constant -funswitch-loops \
+		   -fprofile-correction -funsafe-math-optimizations -fipa-cp-clone \
+		   -fgraphite-identity -floop-interchange -floop-strip-mine -floop-block \
+		   -pipe -mthumb 
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
 # Read KERNELRELEASE from include/config/kernel.release (if it exists)
