@@ -43,7 +43,7 @@ void __exit avs_exit(void);
 int avs_adjust_freq(u32 freq_index, int begin);
 
 /* Routines exported from avs_hw.S */
-#ifdef CONFIG_MSM_CPU_AVS
+#ifdef CONFIG_MSM_AVS_HW
 u32 avs_test_delays(void);
 #else
 static inline u32 avs_test_delays(void)
